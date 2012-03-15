@@ -28,7 +28,11 @@ def split_string(source, splitlist):
         source, res = res, []
         for seq in source:
             res += seq.split(sep)
+            for obj in res:
+            	if obj == '':
+            		res.remove(obj)
     return res
+
 
 out = split_string("This is a test-of the,string separation-code!", " ,!-")
 print out
