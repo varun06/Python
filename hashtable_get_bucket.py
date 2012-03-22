@@ -8,6 +8,8 @@
 #with that key.
 
 def hashtable_lookup(htable,key):
+	if key in htable:
+		
     
 
 def hashtable_add(htable,key,value):
