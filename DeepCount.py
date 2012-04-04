@@ -19,13 +19,13 @@ def is_list(p):
 #input is a List, and returns False otherwise.
 
 def deep_count(p):
-	count = 0
-	for item in p:
-		if(is_list(p)):
-			count += 1 + deep_count(item)
-		else:
-			count += 1
-	return count
+	sum = 0
+	for e in p:
+		sum = sum + 1
+		if is_list(e):
+			sum = sum + deep_count(e)
+	return sum
+
 
 
 
@@ -46,14 +46,14 @@ def deep_count(p):
 
 
 
-# print deep_count([1, 2, 3])
+print deep_count([1, 2, 3])
 #>>> 3
 
 # the empty list still counts as an element of the outer list
-# print deep_count([1, [], 3]) 
+print deep_count([1, [], 3]) 
 #>>> 3 
 
-# print deep_count([1, [1, 2, [3, 4]]])
+print deep_count([1, [1, 2, [3, 4]]])
 #>>> 7
 
 print deep_count([[[[[[[[1, 2, 3]]]]]]]])

@@ -34,6 +34,15 @@
 
 
 def ordered_search(index, ranks, keyword):
+    pages = lookup(index,keyword)
+    if not pages:
+        return None
+    best_page = pages[0]
+    for c in pages:
+        if ranks[c] > ranks[best_page]:
+            best_page = c
+    return best_page
+
 
 
 
@@ -260,21 +269,21 @@ def compute_ranks(graph):
 index, graph = crawl_web('http://udacity.com/cs101x/urank/index.html')
 ranks = compute_ranks(graph)
 
-#print ordered_search(index, ranks, 'Hummus')
+print ordered_search(index, ranks, 'Hummus')
 #>>> ['http://udacity.com/cs101x/urank/kathleen.html', 
 #    'http://udacity.com/cs101x/urank/nickel.html', 
 #    'http://udacity.com/cs101x/urank/arsenic.html', 
 #    'http://udacity.com/cs101x/urank/hummus.html', 
 #    'http://udacity.com/cs101x/urank/index.html'] 
 
-#print ordered_search(index, ranks, 'the')
+print ordered_search(index, ranks, 'the')
 #>>> ['http://udacity.com/cs101x/urank/nickel.html', 
 #    'http://udacity.com/cs101x/urank/arsenic.html', 
 #    'http://udacity.com/cs101x/urank/hummus.html', 
 #    'http://udacity.com/cs101x/urank/index.html']
 
 
-#print ordered_search(index, ranks, 'babaganoush')
+print ordered_search(index, ranks, 'babaganoush')
 #>>> None
 
 

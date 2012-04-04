@@ -19,7 +19,10 @@
 #For credit, your procedure must not use: while, for, or import math. 
 
 def hexes_to_udaciousness(n, spread, target):
-	
+    if n>=target:
+        return 0
+    else:
+        return 1 + hexes_to_udaciousness(n*(1+spread),spread,target)
 
 
 
@@ -33,15 +36,15 @@ print hexes_to_udaciousness(50000, 2, 150000)
 #>>> 1 
 
 #need to match or exceed the target
-# print hexes_to_udaciousness(50000, 2, 150001)
+print hexes_to_udaciousness(50000, 2, 150001)
 #>>> 2 
 
 #only 12 hexamesters (2 years) to world domination!
-# print hexes_to_udaciousness(20000, 2, 7 * 10 ** 9) 
+print hexes_to_udaciousness(20000, 2, 7 * 10 ** 9) 
 #>>> 12 
 
 #more friends means faster world domination!
-#print hexes_to_udaciousness(15000, 3, 7 * 10 ** 9)
+print hexes_to_udaciousness(15000, 3, 7 * 10 ** 9)
 #>>> 10 
 
 
