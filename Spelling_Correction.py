@@ -29,23 +29,45 @@
 #>>> 1
 
 def edit_distance(s,t):
+    distance = 0
+    first_string = list(s)
+    second_string = list(t)
+    while len(first_string) != len(second_string):
+        if len(first_string) > len(second_string):
+            if first_string[0] == second_string[0] or first_string[0].capitalize() == second_string[0].capitalize():
+                del first_string[-1]
+                distance += 1
+            else:
+                del first_string[0]
+                distance += 1
+        elif first_string[0] == second_string[0] or first_string[0].capitalize() == second_string[0].capitalize():
+            del second_string[-1]
+            distance += 1
+        else:
+            del second_string[0]
+            distance += 1
+    for i in range(len(first_string)):
+        if first_string[i] != second_string[i]:
+            first_string[i] = second_string[i]
+            distance += 1
+    return distance
 
 
 
 #For example:
 
 # Delete the 'a'
-#print edit_distance('audacity', 'udacity')
+print edit_distance('audacity', 'udacity')
 #>>> 1
 
 # Delete the 'a', replace the 'u' with 'U'
-#print edit_distance('audacity', 'Udacity')
+print edit_distance('audacity', 'Udacity')
 #>>> 2
 
 # Five replacements
-#print edit_distance('peter', 'sarah')
+print edit_distance('peter', 'sarah')
 #>>> 5
 
 # One deletion
-#print edit_distance('pete', 'peter')
+print edit_distance('pete', 'peter')
 #>>> 1

@@ -32,16 +32,31 @@
 #is not usually a good choice, since it means if the input list is already
 #nearly sorted, the actual work will be much worse than expected).
 
+def quciksort_pages(pages,ranks):
+    if not pages or len(pages) <= 1:
+        return pages
+    else:
+        pivot = ranks[pages[0]] 
+        worse = []
+        better = []
+        for page in pages[1:]:
+            if ranks[page] <= pivot:
+                worse.append(page)
+            else:
+                better.append(page)
+        return quciksort_pages(better,ranks) + [pages[0]] + quciksort_pages(worse,ranks)
+    pass
 
 def ordered_search(index, ranks, keyword):
     pages = lookup(index,keyword)
-    if not pages:
-        return None
-    best_page = pages[0]
-    for c in pages:
-        if ranks[c] > ranks[best_page]:
-            best_page = c
-    return best_page
+    return quciksort_pages(pages,ranks)
+    # if not pages:
+    #     return None
+    # best_page = pages[0]
+    # for c in pages:
+    #     if ranks[c] > ranks[best_page]:
+    #         best_page = c
+    # return best_page
 
 
 
