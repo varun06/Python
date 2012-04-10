@@ -34,9 +34,24 @@
 
 
 def multi_lookup(index, query):
-    print query
-    for item in query:
-        return index[item]
+    findlists = []
+    result = []
+    if not query:
+        return []
+    for word in query:
+        wordres = lookup(index, word)
+        if not wordres:
+            return []
+        findlists.append(wordres)
+    for url, pos in findlists[0]:
+        got_all = True
+        for n in range(1, len(query)):
+            if (url, pos+n) not in findlists[n]:
+                got_all = False
+        if got_all:
+            if url not in result:
+                result.append(url)
+    return result
 
 
 def quicksort_pages(pages,ranks):
@@ -104,11 +119,15 @@ def union(a, b):
 
 def add_page_to_index(index, url, content):
     words = content.split()
-    temp = {}
-    for key,item in enumerate(words):
-        temp[item] = key
-    for word in words:
-        add_to_index(index, word, url,temp)
+    for pos, word in enumerate(words):
+        add_to_index(index, word, url, pos)
+
+def add_to_index(index, keyword, url, pos):
+    if keyword in index:
+        index[keyword].append((url, pos))
+    else:
+        index[keyword] = [(url, pos)]
+
         
 def add_to_index(index, keyword, url,word_position):
     if keyword in index:
