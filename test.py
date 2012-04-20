@@ -1,15 +1,20 @@
-def get_next_target(page):
-    start_link = page.find('<a href=')
+ranks = [9,9,7,7,5]
 
-    #Insert your code here
-    if(start_link == -1):
-    	url = None
-        end_quote = 0
-        return url,end_quote
+
+def kind(n,ranks):
+    for r in ranks:
+        if ranks.count(r) == n: return r
+    return None
+
+
+
+def two_pair(ranks):
+    pair = kind(2,ranks)
+    lowpair = kind(2,list(reversed(ranks)))
+    print (pair and lowpair)
+    if pair and lowpair !=pair:
+        return (pair,lowpair)
     else:
-        start_quote = page.find('"', start_link)
-        end_quote = page.find('"', start_quote + 1)
-        url = page[start_quote + 1:end_quote]
-        return url, end_quote
+        return None
 
-print get_next_target('This is the page <a href = "http:google.com">') 
+print two_pair(ranks)
