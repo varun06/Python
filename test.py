@@ -1,20 +1,26 @@
-ranks = [9,9,7,7,5]
+def rot13_char(ch):
+	if not ch.isalpha():
+		return ch
+ 
+   	ch_low = ch.lower()
+   	if ch_low <= 'm':
+   		dist = 13
+   	else:
+   		dist = -13
+   	return chr(ord(ch) + dist)
+ 
+def rot13(s):
+	return ''.join( rot13_char(ch) for ch in s )
 
 
-def kind(n,ranks):
-    for r in ranks:
-        if ranks.count(r) == n: return r
-    return None
+print rot13('Varun')
+ 
+# if __name__ == '__main__':
+# 	try:
+# 		while True:
+# 			print rot13(raw_input())
+#    	except KeyboardInterrupt:
+#    		print 'Bye!'
 
-
-
-def two_pair(ranks):
-    pair = kind(2,ranks)
-    lowpair = kind(2,list(reversed(ranks)))
-    print (pair and lowpair)
-    if pair and lowpair !=pair:
-        return (pair,lowpair)
-    else:
-        return None
-
-print two_pair(ranks)
+a b c d e f g h i j k l m
+n o p q r s t u v w x y z
