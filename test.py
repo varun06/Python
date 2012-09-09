@@ -1,26 +1,17 @@
-def rot13_char(ch):
-	if not ch.isalpha():
-		return ch
- 
-   	ch_low = ch.lower()
-   	if ch_low <= 'm':
-   		dist = 13
-   	else:
-   		dist = -13
-   	return chr(ord(ch) + dist)
- 
-def rot13(s):
-	return ''.join( rot13_char(ch) for ch in s )
+t = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
 
+def inBucket(t, low, high):
+	count = 0 
+	for num in t:
+		if low < num < high:
+			count += 1
+	return count
 
-print rot13('Varun')
- 
-# if __name__ == '__main__':
-# 	try:
-# 		while True:
-# 			print rot13(raw_input())
-#    	except KeyboardInterrupt:
-#    		print 'Bye!'
-
-a b c d e f g h i j k l m
-n o p q r s t u v w x y z
+numBuckets = 8
+buckets = [0] * numBuckets
+bucketWidth = 1.0 / numBuckets
+for i in range(numBuckets):
+	low = i * bucketWidth
+	high = low + bucketWidth
+	buckets[i] = inBucket(t, low, high)
+print buckets
